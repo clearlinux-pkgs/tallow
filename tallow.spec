@@ -4,7 +4,7 @@
 #
 Name     : tallow
 Version  : 1
-Release  : 1
+Release  : 2
 URL      : https://github.com/sofar/tallow/releases/download/v1/tallow-1.tar.gz
 Source0  : https://github.com/sofar/tallow/releases/download/v1/tallow-1.tar.gz
 Summary  : No detailed summary available
@@ -21,6 +21,14 @@ tallow
 Tallow is a fail2ban/lard replacement that uses systemd's native
 journal API to scan for attempted ssh logins, and issues temporary
 IP bans for clients that violate certain login patterns.
+
+%package autostart
+Summary: autostart components for the tallow package.
+Group: Default
+
+%description autostart
+autostart components for the tallow package.
+
 
 %package bin
 Summary: bin components for the tallow package.
@@ -55,7 +63,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1494133956
+export SOURCE_DATE_EPOCH=1494134098
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto -fno-semantic-interposition "
+export FCFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto -fno-semantic-interposition "
+export FFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto -fno-semantic-interposition "
+export CXXFLAGS="$CXXFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto -fno-semantic-interposition "
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
@@ -67,12 +82,20 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1494133956
+export SOURCE_DATE_EPOCH=1494134098
 rm -rf %{buildroot}
 %make_install
+## make_install_append content
+mkdir -p %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/
+ln -s ../tallow.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/tallow.service
+## make_install_append end
 
 %files
 %defattr(-,root,root,-)
+
+%files autostart
+%defattr(-,root,root,-)
+/usr/lib/systemd/system/multi-user.target.wants/tallow.service
 
 %files bin
 %defattr(-,root,root,-)
@@ -80,6 +103,7 @@ rm -rf %{buildroot}
 
 %files config
 %defattr(-,root,root,-)
+%exclude /usr/lib/systemd/system/multi-user.target.wants/tallow.service
 /usr/lib/systemd/system/tallow.service
 
 %files doc
