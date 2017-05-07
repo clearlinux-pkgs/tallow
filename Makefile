@@ -1,5 +1,5 @@
 PKG_NAME := tallow
-URL := https://github.com/sofar/tallow/releases/download/v1/tallow-1.tar.gz
+URL := https://github.com/sofar/tallow/releases/download/v2/tallow-2.tar.gz
 
 
 include ../common/Makefile.common
