@@ -4,7 +4,7 @@
 #
 Name     : tallow
 Version  : 2
-Release  : 4
+Release  : 5
 URL      : https://github.com/sofar/tallow/releases/download/v2/tallow-2.tar.gz
 Source0  : https://github.com/sofar/tallow/releases/download/v2/tallow-2.tar.gz
 Summary  : No detailed summary available
@@ -15,6 +15,8 @@ Requires: tallow-config
 Requires: tallow-doc
 Requires: ipset
 BuildRequires : pkgconfig(libsystemd)
+Patch1: run-as-nice.patch
+Patch2: fixes.patch
 
 %description
 tallow
@@ -58,13 +60,15 @@ doc components for the tallow package.
 
 %prep
 %setup -q -n tallow-2
+%patch1 -p1
+%patch2 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1494168598
+export SOURCE_DATE_EPOCH=1494199160
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -83,7 +87,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1494168598
+export SOURCE_DATE_EPOCH=1494199160
 rm -rf %{buildroot}
 %make_install
 ## make_install_append content
