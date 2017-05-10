@@ -4,7 +4,7 @@
 #
 Name     : tallow
 Version  : 3
-Release  : 6
+Release  : 7
 URL      : https://github.com/sofar/tallow/releases/download/v3/tallow-3.tar.gz
 Source0  : https://github.com/sofar/tallow/releases/download/v3/tallow-3.tar.gz
 Summary  : No detailed summary available
@@ -14,6 +14,7 @@ Requires: tallow-bin
 Requires: tallow-config
 Requires: tallow-doc
 Requires: ipset
+Requires: iptables
 BuildRequires : pkgconfig(libsystemd)
 Patch1: run-as-nice.patch
 
@@ -66,7 +67,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1494261622
+export SOURCE_DATE_EPOCH=1494460642
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -85,7 +86,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1494261622
+export SOURCE_DATE_EPOCH=1494460642
 rm -rf %{buildroot}
 %make_install
 ## make_install_append content

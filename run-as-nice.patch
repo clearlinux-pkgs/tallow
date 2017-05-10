@@ -4,7 +4,7 @@
  
  [Unit]
  Description=Tallow Service
-+After=clr-power.service
++
  
  [Service]
  ExecStart=@prefix@/sbin/tallow
