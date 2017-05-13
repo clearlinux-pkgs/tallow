@@ -4,13 +4,14 @@
 #
 Name     : tallow
 Version  : 4
-Release  : 9
+Release  : 10
 URL      : https://github.com/sofar/tallow/releases/download/v4/tallow-4.tar.gz
 Source0  : https://github.com/sofar/tallow/releases/download/v4/tallow-4.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-3.0
 Requires: tallow-bin
+Requires: tallow-autostart
 Requires: tallow-config
 Requires: tallow-doc
 Requires: ipset
@@ -67,7 +68,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1494519822
+export SOURCE_DATE_EPOCH=1494708000
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -86,7 +87,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1494519822
+export SOURCE_DATE_EPOCH=1494708000
 rm -rf %{buildroot}
 %make_install
 ## make_install_append content
