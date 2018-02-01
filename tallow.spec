@@ -4,7 +4,7 @@
 #
 Name     : tallow
 Version  : 7
-Release  : 14
+Release  : 15
 URL      : https://github.com/sofar/tallow/releases/download/v7/tallow-7.tar.gz
 Source0  : https://github.com/sofar/tallow/releases/download/v7/tallow-7.tar.gz
 Summary  : No detailed summary available
@@ -13,6 +13,7 @@ License  : GPL-3.0
 Requires: tallow-bin
 Requires: tallow-autostart
 Requires: tallow-config
+Requires: tallow-data
 Requires: tallow-doc
 Requires: ipset
 Requires: iptables
@@ -39,6 +40,7 @@ autostart components for the tallow package.
 %package bin
 Summary: bin components for the tallow package.
 Group: Binaries
+Requires: tallow-data
 Requires: tallow-config
 
 %description bin
@@ -51,6 +53,14 @@ Group: Default
 
 %description config
 config components for the tallow package.
+
+
+%package data
+Summary: data components for the tallow package.
+Group: Data
+
+%description data
+data components for the tallow package.
 
 
 %package doc
@@ -71,7 +81,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1515609115
+export SOURCE_DATE_EPOCH=1517512729
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -90,12 +100,14 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1515609115
+export SOURCE_DATE_EPOCH=1517512729
 rm -rf %{buildroot}
 %make_install
 ## make_install_append content
 mkdir -p %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/
 ln -s ../tallow.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/tallow.service
+mkdir -p %{buildroot}/usr/share/clr-service-restart
+ln -sf /usr/lib/systemd/system/tallow.service %{buildroot}/usr/share/clr-service-restart/tallow.service
 ## make_install_append end
 
 %files
@@ -113,6 +125,10 @@ ln -s ../tallow.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wa
 %defattr(-,root,root,-)
 %exclude /usr/lib/systemd/system/multi-user.target.wants/tallow.service
 /usr/lib/systemd/system/tallow.service
+
+%files data
+%defattr(-,root,root,-)
+/usr/share/clr-service-restart/tallow.service
 
 %files doc
 %defattr(-,root,root,-)
