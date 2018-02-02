@@ -4,7 +4,7 @@
 #
 Name     : tallow
 Version  : 7
-Release  : 15
+Release  : 16
 URL      : https://github.com/sofar/tallow/releases/download/v7/tallow-7.tar.gz
 Source0  : https://github.com/sofar/tallow/releases/download/v7/tallow-7.tar.gz
 Summary  : No detailed summary available
