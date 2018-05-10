@@ -4,7 +4,7 @@
 #
 Name     : tallow
 Version  : 10
-Release  : 18
+Release  : 19
 URL      : https://github.com/sofar/tallow/releases/download/v10/tallow-10.tar.gz
 Source0  : https://github.com/sofar/tallow/releases/download/v10/tallow-10.tar.gz
 Summary  : No detailed summary available
