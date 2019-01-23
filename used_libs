@@ -1,3 +1,4 @@
 libc.so.6
+libjson-c.so.4
 libpcre.so.1
 libsystemd.so.0
