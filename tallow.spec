@@ -4,7 +4,7 @@
 #
 Name     : tallow
 Version  : 16
-Release  : 23
+Release  : 25
 URL      : https://github.com/clearlinux/tallow/releases/download/v16/tallow-16.tar.gz
 Source0  : https://github.com/clearlinux/tallow/releases/download/v16/tallow-16.tar.gz
 Summary  : No detailed summary available
@@ -18,6 +18,7 @@ Requires: tallow-man = %{version}-%{release}
 Requires: tallow-services = %{version}-%{release}
 Requires: ipset
 Requires: iptables
+Requires: tallow-doc
 BuildRequires : pkgconfig(json-c)
 BuildRequires : pkgconfig(libpcre)
 BuildRequires : pkgconfig(libsystemd)
@@ -42,7 +43,6 @@ Summary: bin components for the tallow package.
 Group: Binaries
 Requires: tallow-data = %{version}-%{release}
 Requires: tallow-license = %{version}-%{release}
-Requires: tallow-man = %{version}-%{release}
 Requires: tallow-services = %{version}-%{release}
 
 %description bin
@@ -98,7 +98,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1548285758
+export SOURCE_DATE_EPOCH=1555710604
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -117,7 +117,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1548285758
+export SOURCE_DATE_EPOCH=1555710604
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/tallow
 cp COPYING %{buildroot}/usr/share/package-licenses/tallow/COPYING
