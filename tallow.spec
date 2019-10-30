@@ -4,7 +4,7 @@
 #
 Name     : tallow
 Version  : 18
-Release  : 27
+Release  : 28
 URL      : https://github.com/clearlinux/tallow/releases/download/v18/tallow-18.tar.xz
 Source0  : https://github.com/clearlinux/tallow/releases/download/v18/tallow-18.tar.xz
 Summary  : No detailed summary available
@@ -95,13 +95,14 @@ services components for the tallow package.
 
 %prep
 %setup -q -n tallow-18
+cd %{_builddir}/tallow-18
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1572298195
+export SOURCE_DATE_EPOCH=1572476274
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -121,16 +122,18 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1572298195
+export SOURCE_DATE_EPOCH=1572476274
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/tallow
 cp %{_builddir}/tallow-18/COPYING %{buildroot}/usr/share/package-licenses/tallow/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 %make_install
+## service_restart content
+mkdir -p %{buildroot}/usr/share/clr-service-restart
+ln -s /usr/lib/systemd/system/tallow.service %{buildroot}/usr/share/clr-service-restart/tallow.service
+## service_restart end
 ## install_append content
 mkdir -p %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/
 ln -s ../tallow.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/tallow.service
-mkdir -p %{buildroot}/usr/share/clr-service-restart
-ln -sf /usr/lib/systemd/system/tallow.service %{buildroot}/usr/share/clr-service-restart/tallow.service
 ## install_append end
 
 %files
