@@ -4,7 +4,7 @@
 #
 Name     : tallow
 Version  : 21
-Release  : 32
+Release  : 33
 URL      : https://github.com/clearlinux/tallow/releases/download/v21/tallow-21.tar.xz
 Source0  : https://github.com/clearlinux/tallow/releases/download/v21/tallow-21.tar.xz
 Summary  : No detailed summary available
